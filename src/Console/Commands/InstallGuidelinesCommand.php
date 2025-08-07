@@ -114,6 +114,11 @@ class InstallGuidelinesCommand extends Command
 
         // Copy selected documents
         foreach ($documents as $document => $install) {
+            if ($configDocuments[$document]['custom'] ?? false) {
+                $this->line("Skipped custom <info>{$configDocuments[$document]['name']}</info>");
+                continue;
+            }
+
             if ($install && isset($configDocuments[$document]) && ($configDocuments[$document]['enabled'] ?? false)) {
                 $documentPath = $configDocuments[$document]['path'] ?? $document.'.md';
                 $source = __DIR__.'/../../docs/'.$documentPath;
@@ -139,6 +144,12 @@ class InstallGuidelinesCommand extends Command
                 $documentConfig = $configDocuments[$document];
                 $title = $documentConfig['name'];
                 $path = $documentConfig['path'] ?? $document.'.md';
+
+                if (! File::exists(base_path($outputPath.'/'.$path))) {
+                    $this->warn("Document <info>{$title}</info> not found at {$path}.");
+                    continue;
+                }
+
                 $content .= "- [{$title}]({$path})\n";
             }
         }

@@ -56,6 +56,9 @@ return [
 
 You can enable or disable specific documents by setting the `enabled` flag to `true` or `false`.
 
+You can also add custom documents by setting the `custom` flag to `true`.
+When this flag is set, the command will not copy the file to the output path, but it will include it in the index.md if such a file exists in the output path.
+
 ## Usage
 
 After installing the package, you can:
