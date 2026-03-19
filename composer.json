@@ -16,7 +16,7 @@
         "Junie"
     ],
     "require": {
-        "illuminate/support": "^12.0"
+        "illuminate/support": "^12.0|^13.0"
     },
     "require-dev": {
         "orchestra/testbench": "^10.0",
